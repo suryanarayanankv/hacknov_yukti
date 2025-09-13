@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crowd Detection System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="title">Crowd Detection System</h1>
+                <p class="subtitle">Real-time people monitoring and alert system</p>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator online">System online</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Video Feed Section -->
+            <div class="video-section">
+                <div class="video-header">
+                    <span class="live-indicator">● LIVE</span>
+                    <span class="yolo-status">YOLOv8 Active</span>
+                </div>
+                
+                <div class="video-container">
+                    <img id="videoFeed" src="http://127.0.0.1:8000/video_feed" alt="Live Camera Feed" />
+                    <div class="video-placeholder" id="videoPlaceholder" style="display: none;">
+                        <div class="video-icon">📹</div>
+                        <p>Replace this with actual video feed</p>
+                        <small>http://127.0.0.1:8000/video_feed</small>
+                    </div>
+                </div>
+
+                <!-- Alert Box -->
+                <div class="alert-box" id="alertBox" style="display: none;">
+                    <div class="alert-content">
+                        <h3>High Crowd Detected</h3>
+                        <p id="alertMessage">9 people detected. Consider crowd management measures.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <!-- System Status -->
+                <div class="status-section">
+                    <h2 class="section-title">📊 System Status</h2>
+                    
+                    <div class="status-item warning" id="systemStatus">
+                        <span class="status-dot"></span>
+                        <span>Warning</span>
+                    </div>
+
+                    <div class="status-details">
+                        <div class="status-row">
+                            <span class="status-label">🕒 Last Update</span>
+                            <span class="status-value" id="lastUpdate">--:--:-- PM</span>
+                        </div>
+                        
+                        <div class="status-row">
+                            <span class="status-label">📍 Location</span>
+                            <span class="status-value" id="location">37.7749, -122.4194</span>
+                        </div>
+                        
+                        <div class="status-row">
+                            <span class="status-label">📹 Recording Status</span>
+                            <span class="status-value" id="recordingStatus">Standby</span>
+                        </div>
+                        
+                        <div class="status-row">
+                            <span class="status-label">🌐 Network</span>
+                            <span class="status-value connected" id="networkStatus">Connected</span>
+                        </div>
+                    </div>
+
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-value" id="uptime">99.2%</div>
+                            <div class="metric-label">Uptime</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">24/7</div>
+                            <div class="metric-label">Monitoring</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threshold Settings -->
+                <div class="settings-section">
+                    <h2 class="section-title">⚙️ Threshold Settings</h2>
+                    
+                    <div class="threshold-setting">
+                        <label for="crowdThreshold">Crowd Alert Threshold:</label>
+                        <div class="threshold-input-group">
+                            <input type="number" id="crowdThreshold" min="1" max="100" value="5">
+                            <span class="threshold-unit">people</span>
+                            <button class="btn-update" onclick="updateThreshold()">Update</button>
+                        </div>
+                        <small>Alert will trigger when crowd exceeds this number</small>
+                    </div>
+
+                    <div class="current-count">
+                        <div class="count-display">
+                            <span class="count-label">Current Count:</span>
+                            <span class="count-value" id="currentCount">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls-section">
+                    <h2 class="section-title">🎮 Control Panel</h2>
+                    
+                    <div class="video-recording">
+                        <span class="control-label">Video Recording</span>
+                        <span class="auto-trigger">Auto-trigger ready</span>
+                        
+                        <button class="btn-primary" id="recordingBtn" onclick="toggleRecording()">
+                            📹 Start Recording
+                        </button>
+                        
+                        <small class="help-text">Recording will auto-start if crowd exceeds threshold</small>
+                    </div>
+
+                    <div class="emergency-alerts">
+                        <span class="control-label">Emergency Alerts</span>
+                        
+                        <button class="btn-warning" onclick="sendAlert()">
+                            ⚠️ Send Alert
+                        </button>
+                    </div>
+
+                    <div class="quick-actions">
+                        <span class="control-label">Quick Actions</span>
+                        
+                        <button class="btn-secondary" onclick="exportData()">
+                            💾 Export Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
