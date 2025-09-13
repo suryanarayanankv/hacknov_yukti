@@ -56,7 +56,9 @@ BACKEND_URL = "http://localhost:8000/update_count"  # Server URL
 1. Install on each camera device
 2. Set unique `camera_id` for each
 3. Point all cameras to same server URL
-4. Monitor all from single dashboard
+4. All camera data gets stored in `server.py`
+5. Dashboard fetches combined data from server
+6. Monitor all cameras from single interface
 
 ## Troubleshooting
 
